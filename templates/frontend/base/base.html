@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Market | {% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+  <body>
+    <header>
+      <div class="header1">
+        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>seafood</a>
+        <form action="" class="search-box-container">
+          <input type="search" id="search-box" placeholder="search here...">
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+      </div>
+      <div class="header2">
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <nav class="navbar">
+          <a href="#home">home</a>
+          <a href="#category">category</a>
+          <a href="#product">product</a>
+          <a href="#deal">deal</a>
+          <a href="#contact">contact</a>
+        </nav>
+        <div class="icons">
+          <a href="#" class="fas fa-shopping-cart"></a>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-user-circle"></a>
+        </div>
+      </div>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+    <section class="footer">
+      <div class="box-container">
+        <div class="box">
+          <a href="" class="logo"><i class="fas fa-shopping-basket"></i></a>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam possimus voluptates commodi laudantium!
+            Doloribus sint voluptatibus quaerat farhan suscipit nulla?
+          </p>
+          <div class="share">
+            <a href="#" class="btn fab fa-facebook-f"></a>
+            <a href="#" class="btn fab fa-twitter"></a>
+            <a href="#" class="btn fab fa-instagram"></a>
+            <a href="#" class="btn fab fa-linkedin"></a>
+          </div>
+        </div>
+        <div class="box">
+          <h3>our location</h3>
+          <div class="links">
+            <a href="#">USA</a>
+            <a href="#">india</a>
+            <a href="#">dubai</a>
+            <a href="#">turkey</a>
+            <a href="#">azerbaijan</a>
+          </div>
+        </div>
+        <div class="box">
+          <h3>quick links</h3>
+          <div class="links">
+            <a href="#">home</a>
+            <a href="#">category</a>
+            <a href="#">product</a>
+            <a href="#">deal</a>
+            <a href="#">contact</a>
+          </div>
+        </div>
+        <div class="box">
+          <h3>download app</h3>
+          <div class="links">
+            <a href="#">google play</a>
+            <a href="#">window 10</a>
+            <a href="#">app store</a>
+          </div>
+        </div>
+      </div>
+      <h1 class="credit"> created by <span> Dailywebdesign </span> || all rights reserved! </h1>
+    </section>
+
+    <script src="{% static "js/main.js" %}" defer data-deferred="1"></script> 
+  </body>
+</html>
