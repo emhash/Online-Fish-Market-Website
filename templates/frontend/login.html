@@ -1,0 +1,44 @@
+{% extends "frontend/base/base.html" %}
+{% load static %}
+{% block title %}Sign In{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/login.css" %}">
+{% endblock css %}
+{% block content %}
+
+<div class="wrapper">
+	<div class="header">
+		<div class="top">
+			<div class="logo">
+				<img src="{% static "image/emhash.png" %}" alt="emhash" style="width: 175px;">
+			</div>
+			<div class="form">
+				<div class="input_field">
+					<input type="text" placeholder="Phone number, username, or email" class="input">
+				</div>
+				<div class="input_field">
+					<input type="password" placeholder="Password" class="input">
+				</div>
+				<div class="butn"><a href="#">Log In</a></div>
+			</div>
+			<div class="or">
+				<div class="line"></div>
+				<p>OR</p>
+				<div class="line"></div>
+			</div>
+			<div class="dif">
+				
+				<div class="forgot">
+					<a href="#">Forgot password?</a>
+				</div>
+			</div>
+		</div>
+		<div class="signup">
+			<p>Don't have an account? <a href="{% url "registration" %}">Sign up</a></p>
+		</div>
+
+	</div>
+</div>
+
+
+{% endblock content %}

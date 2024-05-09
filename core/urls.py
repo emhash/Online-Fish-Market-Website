@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('dashboard/', include("adminpanel.urls")),
     path('', include("market.urls")),
+    path('auth/', include("users.urls")),
 ]
 urlpatterns+= staticfiles_urlpatterns()
 urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
