@@ -37,18 +37,29 @@
 	border: 1px solid #b2b2b2;
 }
 
-.wrapper .header .form .butn{
-	margin: 10px 0;
-	background-color: #3897f0;
+.wrapper .header .form .butndiv {
+    margin: 10px 0;
+    background-color: #3897f0;
     border-radius: 4px;
     text-align: center;
     padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
 
-.wrapper .header .form .butn a{
-	color: #fff;
-	display: block;
+.wrapper .header .form .butndiv button {
+    color: #fff;
+    background-color: #3897f0; /* Match background color for consistency */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
 }
+
+.wrapper .header .form .butndiv button:hover {
+    background-color: #2684f0; /* Darker shade on hover */
+}
+
 
 .wrapper .header .or{
 	display: flex;
@@ -69,22 +80,6 @@
 	font-size: 13px;
 }
 
-.wrapper .dif .fb{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.wrapper .dif .fb img{
-	width: 16px;
-	height: 16px;
-}
-
-.wrapper .dif  .fb p{
-	color: #385185;
-	font-weight: 500;
-	margin-left: 10px;
-}
 
 .wrapper .dif .forgot{
 	font-size: 13px;

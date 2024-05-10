@@ -14,24 +14,47 @@
     <header>
       <div class="header1">
         <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>seafood</a>
-        <form action="" class="search-box-container">
-          <input type="search" id="search-box" placeholder="search here...">
-          <label for="search-box" class="fas fa-search"></label>
+         {% comment %} <form method="GET" class="search-box-container">
+          {% for field in searching.form %}
+          {{field.label}}
+          {{field}}
+          {% endfor %}
+          <button>
+            <label for="search-box" class="fas fa-search"></label>
+          </button>
+        </form>  {% endcomment %}
+
+        <form action="/products/?" class="search-box-container">
+          <input name="name" type="search" id="search-box" placeholder="Fish name">
+          <input name="price_min" type="search" id="search-box" placeholder="Min Price">
+          <input name="price_max" type="search" id="search-box" placeholder="Max Price">
+          <button>
+            <label for="search-box" class="fas fa-search"></label>
+          </button>
         </form>
+
       </div>
       <div class="header2">
         <div id="menu-bar" class="fas fa-bars"></div>
         <nav class="navbar">
           <a href="{% url "homepage" %}">home</a>
-          <a href="#category">category</a>
-          <a href="#product">product</a>
+          <a href="#category">Category</a>
+          <a href="{% url "products" %}">Products</a>
           <a href="#deal">deal</a>
           <a href="#contact">contact</a>
+          
         </nav>
         <div class="icons">
-          <a href="#" class="fas fa-shopping-cart"></a>
+          <a href="#" class="fas fa-shopping-cart"><span>5</span></a>
           <a href="#" class="fas fa-heart"></a>
+          {% if user.is_authenticated %}
+
+          <a href="{% url "logout_view" %}" class="fas fa-sign-out-alt"></a>
+          
+          {% else %}
           <a href="{% url "loginpage" %}" class="fas fa-user-circle"></a>
+          
+          {% endif %}
         </div>
       </div>
     </header>

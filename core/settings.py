@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'users',
     'adminpanel',
     'market',
+    'rest_framework',
+    'django_filters',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,7 +92,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # --=====> EXTRA <=====------
 
 AUTH_USER_MODEL = 'users.User'
-
+LOGIN_URL = "/auth/login/"
 # ------======== ------
 
 LANGUAGE_CODE = 'en-us'

@@ -12,16 +12,28 @@
 			<div class="logo">
 				<img src="{% static "image/emhash.png" %}" alt="emhash" style="width: 175px;">
 			</div>
+			{% if messages %}
+			
+			{% for error in messages %}
+			<p style="color:red;">{{error}}</p><br>
+			{% endfor %}
+			{% endif %}
+
 			<div class="form">
-				<div class="input_field">
-					<input type="text" placeholder="Phone number, username, or email" class="input">
+				<form action="" method="POST">
+					{% csrf_token %}
+					<div class="input_field">
+						<input name="userinfo" type="text" placeholder="Phone number, username, or email" class="input">
+					</div>
+					<div class="input_field">
+						<input name="userpassword" type="password" placeholder="Password" class="input">
+					</div>
+					<div class="butndiv">
+						<button class="butn">Log In</button>
+					</div>
+				</form>
 				</div>
-				<div class="input_field">
-					<input type="password" placeholder="Password" class="input">
-				</div>
-				<div class="butn"><a href="#">Log In</a></div>
-			</div>
-			<div class="or">
+				<div class="or">
 				<div class="line"></div>
 				<p>OR</p>
 				<div class="line"></div>

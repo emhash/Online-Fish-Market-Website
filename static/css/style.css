@@ -18,7 +18,7 @@ body{
     outline: none;
     border: none;
     text-decoration: none;
-    text-transform: capitalize;
+    
     transition: all .2s linear;
 }
 
@@ -155,16 +155,34 @@ section{
     color: goldenrod;
 }
 
-.header2 .icons a{
-    font-size:2.5rem;
+.header2 .icons {
+    position: relative;
+}
+
+.header2 .icons a {
+    font-size: 2.5rem;
     color: var(--darkgreen);
     padding-left: 1rem;
     text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    position: relative; /* Ensure the anchor is positioned relatively */
 }
 
-.header2 .icons a:hover{
+.header2 .icons a:hover {
     color: var(--black);
 }
+
+.header2 .icons span {
+    position: absolute;
+    top: -0.5rem; /* Adjust as needed to position the number */
+    right: -0.5rem; /* Adjust as needed to position the number */
+    background-color: red;
+    color: white;
+    border-radius: 50%; /* Makes the background a circle */
+    padding: 0.5rem; /* Add padding for better visibility */
+    font-size: 1rem; /* Adjust font size as needed */
+}
+
+
 
 #menu-bar{
     font-size:2.5rem;
@@ -417,6 +435,64 @@ section{
 .product .box-container .box .btn{
     display: block;
 }
+
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    color: gold;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a:hover:not(.current) {
+    background-color: #ddd;
+}
+
+.pagination .current {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+}
+
+.mt-2{
+    margin-top: 2px;
+}
+.mr-2{
+    margin-right: 2px;
+}
+.ml-2{
+    margin-left: 2px;
+}
+.mb-2{
+    margin-bottom: 2px;
+}
+
+.pagination .step-links {
+    margin-left: 2px;
+    color: #fff;
+    display: inline-block;
+    background-color: #012a41;
+}
+
+.pagination .step-links a {
+    color: #fff;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+.pagination .step-links .current {
+    /* background-color: #ddd; */
+    color: black;
+    text-shadow: none;
+
+}
+
+
 
 .deal{
     background:url(deal-bg1.jpg) no-repeat;
