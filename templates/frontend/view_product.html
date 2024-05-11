@@ -2,10 +2,57 @@
 {% load static %}
 {% block title %}Product{% endblock title %}
 {% block css %}
-
+<link rel="stylesheet" href="{% static "css/product_view.css" %}">
 {% endblock css %}
 {% block content %}
 
 <h1 class="heading"> <span>Product - </span> Katla Fish </h1>
+
+    <main class="main">
+        <div class="container">
+            <div class="product-view">
+                <div class="product-image">
+                    <img src="{{fish.image.url}}" alt="Product Image">
+                </div>
+                <div class="product-details">
+                    <h1>{{fish.name}}</h1>
+                    <div class="rating">
+                        <span class="fas fa-star"></span>
+                        <span class="fas fa-star"></span>
+                        <span class="fas fa-star"></span>
+                        <span class="fas fa-star"></span>
+                        <span class="fas fa-star-half-alt"></span>
+                        <span>(21)</span>
+                    </div>
+                    <p class="price">
+                        <span class="old-price">{{fish.price}} ৳/=</span>
+                        <span class="new-price">{{fish.discounted_price}} ৳/=</span>
+                        <span class="discount">({{fish.discount}}%)</span>
+                    </p>
+                    <div class="description">
+                        <h3>About This Product</h3>
+                        {{fish.detail}}
+                    </div>
+                    <ul class="features">
+                        <li>✔ Size: Medium</li>
+                        <li>✔ Available: {{fish.available}}Unlimited KG</li>
+                        <li>✔ Shipping Fee: Free</li>
+                    </ul>
+                    <div class="cart-add">
+                        <a href="{% url "cart_view" fish.uid %}" class="btn">Add to Cart</a>
+                        <button type="button">Compare</button>
+                    </div>
+                    <div class="share">
+                        <span>Share At:</span>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-code.js" crossorigin="anonymous"></script>
 
 {% endblock content %}

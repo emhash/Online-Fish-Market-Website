@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponseRedirect, get_list_or_404
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
@@ -21,17 +21,63 @@ def homepage(request):
     }
     return render(request, "frontend/index.html",context)
 
-# WORK <<--- HERE
+# WORK <<--- HERE --------=========================
 @login_required()
-def cart_view(request, uid):
+def cart_view(request, u_id):
     referring_url = request.META.get('HTTP_REFERER')
-    # print(uid)
+    print("---->>> One Item added to the cart <<<---- ")
+    the_item = get_object_or_404(Fish, uid=u_id.strip())
+    print(the_item)
+    add_item = CartItem.objects.get_or_create(
+        user= request.user.profile,
+        fish= the_item,
+        purchased= False,
+    )
+    orders_item = Order.objects.filter(
+        user = request.user.profile,
+        payment = False,
+    )
+    if orders_item.exists():
+        # print(ordered_item)
+        order = orders_item[0]
+        if order.ordered_items.filter(fish = the_item).exists():
+            add_item[0].quantity += 1
+            print("Item increamented!")
+            add_item[0].save()
+            return HttpResponseRedirect(referring_url)
+        else:
+            order.ordered_items.add(add_item[0])
+            print("Item added success")
+            return HttpResponseRedirect(referring_url)
+    else:
+        order = Order(user = request.user.profile)
+        order.save()
+        order.ordered_items.add(add_item[0])
+        print("Item added to cart")
 
     return redirect(referring_url)
 
+@login_required()
+def cart(request):
+    profile = request.user.profile # as it is one to one field
+    cart_items = CartItem.objects.filter(user = profile, purchased = False)
+    ordered = Order.objects.filter(user = profile, payment = False)
+    context ={
+        "cart":cart_items,
+        "orders":ordered.first(),
+        
+    }
+    return render(request, "frontend/cart.html", context)
+
+
+# ==============================================
+
+
+
+
 # WORKING <<<<---=== HERE
 def view_product(request, uid):
-    the_product = get_list_or_404(Fish, uid = uid)
+    the_product = get_object_or_404(Fish, uid = uid)
     
     referring_url = request.META.get('HTTP_REFERER')
 

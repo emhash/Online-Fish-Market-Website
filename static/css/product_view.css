@@ -1,0 +1,118 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .product-view {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .product-image {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+  
+  .product-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-details {
+    flex: 0 0 60%;
+    max-width: 60%;
+    padding-left: 20px;
+  }
+  
+  .product-details h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .rating {
+    color: #FFD700;
+  }
+  
+  .price {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .old-price {
+    color: #888;
+    text-decoration: line-through;
+    margin-right: 10px;
+  }
+  
+  .new-price {
+    color: #333;
+  }
+  
+  .discount {
+    color: #2ecc71;
+  }
+  
+  .description {
+    margin-top: 20px;
+  }
+  
+  .description h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .description p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .features {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .features li {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .cart-add {
+    margin-top: 20px;
+  }
+  
+  .cart-add button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .cart-add button:last-child {
+    margin-right: 0;
+  }
+  
+  .share {
+    margin-top: 20px;
+  }
+  
+  .share span {
+    margin-right: 10px;
+  }
+  
+  .share a {
+    margin-right: 10px;
+  }
+  
+  .share i {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* You need to include Font Awesome CSS for the icons to display properly */
+  
