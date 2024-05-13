@@ -40,18 +40,22 @@ section{
 
 
 .search-local {
-    background-color: #fff;
+    background-color: var(--darkgreen);
     padding-left: 10px;
-    border-radius: 5px;
+    border-bottom-left-radius: 7px;
+    border-top-right-radius: 7.5px;
     display: flex;
     height: 35px;
     align-items: center;
-  }
-  .search-local input {
+}
+.search-local input {
+    color: #fff;
+    background-color: var(--darkgreen);
     height: 20px;
   }
   .search-local button {
-    background-color: #2b8ab9;
+    background-color: gold;
+    border-top-right-radius: 7px;
     height: 35px;
     width: 35px;
     cursor: pointer;

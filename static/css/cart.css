@@ -92,4 +92,24 @@
   }
 }
 
-/* Optional: Add fish-themed element for a
+.quantiy{
+  /* display: flex; */
+}
+
+.quantiy button{
+  padding: auto;
+  height: 10px;
+  width: 10px;
+  cursor: pointer;
+  float: right;
+}
+.quantiy .plus{
+  border: solid 2px;
+  margin-left: 50px;
+  
+}
+.quantiy .minus{
+    border: solid 2px;
+    margin-left: 10px;
+    
+  }

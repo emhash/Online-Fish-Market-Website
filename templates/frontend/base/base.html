@@ -1,3 +1,4 @@
+{% load common %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +64,7 @@
           
         </nav>
         <div class="icons">
-          <a href="{% url "cart" %}" class="fas fa-shopping-cart">{% if cart_item %}<span>{{cart_item}}</span>{% endif %}</a>
+          <a href="{% url "cart" %}" class="fas fa-shopping-cart"><span>{{ request.user.profile | cart_data }}</span></a>
           <a href="#" class="fas fa-heart">{% if fav_item %}<span>{{fav_item}}</span>{% endif %}</a>
           {% if user.is_authenticated %}
 

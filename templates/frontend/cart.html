@@ -19,7 +19,11 @@
             <img src="{{fish.fish.image.url}}" alt="Fish Image" class="cart-item-image">
             <div class="cart-item-details">
                 <h3 class="cart-item-name">{{fish.fish.name}}</h3>
-                <p class="cart-item-quantity">Quantity: <span class="item-quantity">{{fish.quantity}}</span></p>
+                <div class="quantiy">
+                    
+                    <p class="cart-item-quantity">Quantity: <button>+</button> {{fish.quantity}} <button> - </button>
+                    
+                </div>
                 <p class="cart-item-price">Price: <span class="item-price">{{fish.subtotal}} ৳/=</span></p>
             </div>
         </div>
