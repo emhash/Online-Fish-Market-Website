@@ -24,14 +24,32 @@
           </button>
         </form>  {% endcomment %}
 
-        <form action="/products/?" class="search-box-container">
-          <input name="name" type="search" id="search-box" placeholder="Fish name">
-          <input name="price_min" type="search" id="search-box" placeholder="Min Price">
-          <input name="price_max" type="search" id="search-box" placeholder="Max Price">
-          <button>
-            <label for="search-box" class="fas fa-search"></label>
-          </button>
+        {% comment %} <form action="/products/?" >
+          <div class="search">
+            <input name="name"  placeholder="Fish name">            
+            <input  type="number" name="price_min"  placeholder="Min Price"><span>-</span>
+            <input type="number" name="price_max" placeholder="Max Price">
+            
+            <button type="submit" class="btn">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+            
         </form>
+         {% endcomment %}
+        
+        <form action="/products/?" >
+          <div class="search-local">
+            <input class="input1" name = "name" type="text" placeholder="Fish name">
+            <input class="input2"  type="number" name="price_min"  placeholder="Min Price"><span>-</span>
+            <input class="input2" type="number" name="price_max" placeholder="Max Price">
+
+            <button type="submit">
+              <i class="fas fa-search"> </i>
+            </button>
+          </div>
+        </form>
+        
 
       </div>
       <div class="header2">

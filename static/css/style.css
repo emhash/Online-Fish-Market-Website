@@ -38,6 +38,29 @@ section{
     padding: 2rem 9%;
 }
 
+
+.search-local {
+    background-color: #fff;
+    padding-left: 10px;
+    border-radius: 5px;
+    display: flex;
+    height: 35px;
+    align-items: center;
+  }
+  .search-local input {
+    height: 20px;
+  }
+  .search-local button {
+    background-color: #2b8ab9;
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+  }
+  .search-local input[type="number"] {
+    width: 55px;
+    height: 20px;
+    margin: 5px;
+  }
 .btn{
     display:inline-block;
     margin-top:1rem;
@@ -93,6 +116,7 @@ section{
     color: var(--black);
     text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
 }
+
 
 .header1 .search-box-container{
     display: flex;
