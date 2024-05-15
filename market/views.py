@@ -60,14 +60,52 @@ def cart_view(request, u_id):
 @login_required()
 def cart(request):
     profile = request.user.profile # as it is one to one field
-    cart_items = CartItem.objects.filter(user = profile, purchased = False)
-    ordered = Order.objects.filter(user = profile, payment = False)
-    context ={
-        "cart":cart_items,
-        "orders":ordered.first(),
-        
-    }
-    return render(request, "frontend/cart.html", context)
+    if Order.objects.filter(user = request.user.profile, payment=False).exists():
+        cart_items = CartItem.objects.filter(user = profile, purchased = False)
+        ordered = Order.objects.filter(user = profile, payment = False).first()
+        context ={
+            "cart":cart_items,
+            "orders":ordered,
+        }
+        return render(request, "frontend/cart.html", context)
+    else:
+        print("You have no order.")
+    return redirect("homepage")
+
+def cart_plus(request,the_id):
+    referring_url = request.META.get('HTTP_REFERER')
+    try:
+        item = get_object_or_404(CartItem, uid = the_id.strip())
+        if Order.objects.filter(user = request.user.profile ,ordered_items=item, payment=False).exists():
+                if item.purchased == False:
+                    item.quantity += 1
+                    item.save()
+                    return redirect("cart")            
+        else:
+            print("Oops You have no oders!")
+    except Exception as e:
+        print('ERROR:--> ',e)
+
+    return redirect(referring_url)
+
+def cart_minus(request,the_id):
+    referring_url = request.META.get('HTTP_REFERER')
+    try:
+        item = get_object_or_404(CartItem, uid = the_id.strip())
+        if Order.objects.filter(user = request.user.profile ,ordered_items=item, payment=False).exists():
+                if item.purchased == False:
+                    if item.quantity > 1:
+                        item.quantity -= 1
+                        item.save()
+                        return redirect("cart")
+                    else:
+                        print("No more item could be decrease!")
+        else:
+            print("Oops You have no oders!")
+    except Exception as e:
+        print('ERROR:--> ',e)
+
+    return redirect(referring_url)
 
 
 # ==============================================

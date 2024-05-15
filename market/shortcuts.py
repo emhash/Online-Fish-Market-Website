@@ -1,16 +1,5 @@
 from django.core.paginator import Paginator
-from .models import CartItem, Favorite
-
-def common_data(request):
-    if request.user.is_authenticated:
-        profile = request.user.profile
-    else:
-        profile = None
-    context ={
-        "cart_item":CartItem.objects.filter(user=profile, purchased = False).count(),
-        "fav_item": Favorite.objects.filter(user = profile).count()
-    }
-    return context
+from .models import CartItem, Favorite, Order
 
 class ObjectMaster():
     '''Add the Query Object as constructor '''

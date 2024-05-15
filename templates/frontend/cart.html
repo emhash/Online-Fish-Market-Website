@@ -6,48 +6,45 @@
 {% endblock css %}
 
 {% block content %}
-
 <section class="product" id="product">
     <h1 class="heading">latest <span>Fishes</span></h1>
     <div  class="cart-container">
-    <h2 class="cart-title">Your Shopping Cart</h2>
-
-
-    <div class="cart-items-wrapper">
-        {% for fish in cart %}
+      <h2 class="cart-title">Your Shopping Cart</h2>
+      <div class="cart-items-wrapper">
+        {% for the_item in cart %}
         <div class="cart-item">
-            <img src="{{fish.fish.image.url}}" alt="Fish Image" class="cart-item-image">
-            <div class="cart-item-details">
-                <h3 class="cart-item-name">{{fish.fish.name}}</h3>
-                <div class="quantiy">
-                    
-                    <p class="cart-item-quantity">Quantity: <button>+</button> {{fish.quantity}} <button> - </button>
-                    
-                </div>
-                <p class="cart-item-price">Price: <span class="item-price">{{fish.subtotal}} ৳/=</span></p>
+            
+          <img src="{{the_item.fish.image.url}}" alt="Fish Image" class="cart-item-image">
+          <div class="cart-item-details">
+            <h3 class="cart-item-name">{{the_item.fish.name}}</h3>
+            <div class="quantiy">
+              <p class="cart-item-quantity">Quantity(KG):
+                 <a href="{% url "cart_plus" the_item.uid %}" class="plus">+</a> 
+                {{the_item.quantity}} 
+                <a href="{% url "cart_minus" the_item.uid %}" class="minus"> - </a>
             </div>
+            <p class="cart-item-price">Price: <span class="item-price"> &#2547 {{the_item.subtotal}} </span></p>
+          </div>
+          <a href="" class="delete">Delele  <i class="fas fa-trash"></i></a>
         </div>
         {% endfor %}
-    </div>
-
-    <div class="cart-totals-wrapper">
-        
+      </div>
+      <div class="cart-totals-wrapper">
         <div class="cart-subtotal">
-        <span class="subtotal-label">Subtotal:{{orders.get_total}}</span>
-        <span class="subtotal-amount"></span>
+          <span class="subtotal-label">Subtotal:{{orders.get_total}}</span>
+          <span class="subtotal-amount"></span>
         </div>
         <div class="cart-shipping-cost">
-        <span class="shipping-cost-label">Shipping:50</span>
-        <span class="shipping-cost-amount"></span>
+          <span class="shipping-cost-label">Shipping:50</span>
+          <span class="shipping-cost-amount"></span>
         </div>
         <div class="cart-total">
-        <span class="total-label">Total:{{orders.get_total }}</span>
-        <span class="total-amount"></span>
+          <span class="total-label">Total:{{orders.get_total }}</span>
+          <span class="total-amount"></span>
         </div>
         <a href="#" class="cart-checkout-btn">Proceed to Checkout</a>
+      </div>
     </div>
-    </div>
-</section>
-
+  </section>
 
 {% endblock content %}
