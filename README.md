@@ -14,11 +14,11 @@ Activate the envoirnment:
 
 Try any of these below - 
 <br>
-i)  .myenv\Scripts\activated
+i)  source xenon\Scripts\activate
 <br>
-ii)  .myenv\Scripts\python
+ii)  .xenon\Scripts\activated
 <br>
-iii)  source myenv\Scripts\activate
+iii)  .xenon\Scripts\python
 <br>
 
 step3:
@@ -60,5 +60,6 @@ python manage.py runserver
 ----- THATS ALL THE PROJECT IS RUNNING -----
 
 Admin panel: 
-admin@gmail.com
+admin@gmail.com 
+<br>
 password: 12345
