@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+# from django.conf import messages
 
+from adminpanel.forms import ContactUsMessageForm
 from .models import *
 from .shortcuts import ObjectMaster
 from .filter import FishFilter
@@ -10,7 +12,14 @@ def homepage(request):
     categories = Category.objects.all()
     fishes = Fish.objects.all().order_by('price')
     offers = Offer.objects.all()
-
+    if request.method=="POST":
+        form=ContactUsMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            
+            return redirect(request.path)                
+    else:
+        form=ContactUsMessageForm()
     obj = ObjectMaster(request=request,the_query=fishes)
     pg_obj = obj.Paginate(no_of_object=15)
 
@@ -18,6 +27,7 @@ def homepage(request):
         "categories":categories,
         "fishes":pg_obj,
         "offers":offers,
+        "form":form,
     }
     return render(request, "frontend/index.html",context)
 
@@ -25,9 +35,9 @@ def homepage(request):
 @login_required()
 def cart_view(request, u_id):
     referring_url = request.META.get('HTTP_REFERER')
-    print("---->>> One Item added to the cart <<<---- ")
+    # print("---->>> One Item added to the cart <<<---- ")
     the_item = get_object_or_404(Fish, uid=u_id.strip())
-    print(the_item)
+    # print(the_item)
     add_item = CartItem.objects.get_or_create(
         user= request.user.profile,
         fish= the_item,
@@ -42,18 +52,18 @@ def cart_view(request, u_id):
         order = orders_item[0]
         if order.ordered_items.filter(fish = the_item).exists():
             add_item[0].quantity += 1
-            print("Item increamented!")
+            # print("Item increamented!")
             add_item[0].save()
             return HttpResponseRedirect(referring_url)
         else:
             order.ordered_items.add(add_item[0])
-            print("Item added success")
+            # print("Item added success")
             return HttpResponseRedirect(referring_url)
     else:
         order = Order(user = request.user.profile)
         order.save()
         order.ordered_items.add(add_item[0])
-        print("Item added to cart")
+        # print("Item added to cart")
 
     return redirect(referring_url)
 
@@ -71,7 +81,7 @@ def cart(request):
     else:
         print("You have no order.")
     return redirect("homepage")
-
+@login_required()
 def cart_plus(request,the_id):
     referring_url = request.META.get('HTTP_REFERER')
     try:
@@ -88,6 +98,7 @@ def cart_plus(request,the_id):
 
     return redirect(referring_url)
 
+@login_required()
 def cart_minus(request,the_id):
     referring_url = request.META.get('HTTP_REFERER')
     try:
@@ -110,10 +121,17 @@ def cart_minus(request,the_id):
 
 # ==============================================
 
+# WORKING <<<<---=== 
+def delete_cart_product(request, puid):
+    the_cart = get_object_or_404(CartItem, uid=puid.strip())
+    try:
+        the_cart.delete()
+    except:
+        print("Cant delete due to some error!")
 
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
-# WORKING <<<<---=== HERE
+@login_required()
 def view_product(request, uid):
     the_product = get_object_or_404(Fish, uid = uid)
     
@@ -124,6 +142,7 @@ def view_product(request, uid):
     }
     return render(request, "frontend/view_product.html", context)
 
+@login_required()
 def products(request):
     fishes = Fish.objects.all().order_by('price')
 
@@ -136,3 +155,6 @@ def products(request):
         "searching":search,
     }
     return render(request, "frontend/products.html", context)
+
+
+

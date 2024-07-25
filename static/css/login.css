@@ -42,14 +42,17 @@
     background-color: #3897f0;
     border-radius: 4px;
     text-align: center;
+	align-items: flex-start;
+	display: flex;
     padding: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
 }
 
 .wrapper .header .form .butndiv button {
     color: #fff;
-    background-color: #3897f0; /* Match background color for consistency */
+    background-color: #092947; /* Match background color for consistency */
     border: none;
+	
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
@@ -57,7 +60,7 @@
 }
 
 .wrapper .header .form .butndiv button:hover {
-    background-color: #2684f0; /* Darker shade on hover */
+    background-color: green; /* Darker shade on hover */
 }
 
 

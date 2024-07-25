@@ -17,15 +17,17 @@
           <img src="{{the_item.fish.image.url}}" alt="Fish Image" class="cart-item-image">
           <div class="cart-item-details">
             <h3 class="cart-item-name">{{the_item.fish.name}}</h3>
-            <div class="quantiy">
-              <p class="cart-item-quantity">Quantity(KG):
-                 <a href="{% url "cart_plus" the_item.uid %}" class="plus">+</a> 
-                {{the_item.quantity}} 
-                <a href="{% url "cart_minus" the_item.uid %}" class="minus"> - </a>
-            </div>
+            
             <p class="cart-item-price">Price: <span class="item-price"> &#2547 {{the_item.subtotal}} </span></p>
           </div>
-          <a href="" class="delete">Delele  <i class="fas fa-trash"></i></a>
+          <div class="quantiy">
+            <p class="cart-item-quantity"> Quantity(KG):
+              <a href="{% url "cart_plus" the_item.uid %}" class="plus">+</a> 
+              {{the_item.quantity}}
+              <a href="{% url "cart_minus" the_item.uid %}" class="minus"> - </a>
+            </p>
+          </div>
+          <a href="{% url "delete_cart_product" the_item.uid %}" class="delete">Delele  <i class="fas fa-trash"></i></a>
         </div>
         {% endfor %}
       </div>

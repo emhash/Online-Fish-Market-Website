@@ -5,6 +5,7 @@ class ContactUsMessage(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=200)
     message = models.TextField()
+    number = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.subject
+        return f" {self.name} Contact about: {self.subject}"

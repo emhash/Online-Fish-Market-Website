@@ -13,17 +13,35 @@
 				<img src="{% static "image/emhash.png" %}" alt="emhash" style="width: 175px;">
 			</div>
 			<div class="form">
-                <form action="" method = "POST" enctype="multipart/data">
+                <form novalidate method ="POST" >
                     {% csrf_token %}
 
                     {% for field in form %}
-                    {{field}}
+					<br>
+                    {{field.label}}
+					<div class="input_field">						
+						{{field}}
+					</div>
+
+					{% if field.errors %}
                     {% for error in field.errors %}
                     <p style="color:red;">{{error}}</p>
+					<br>
                     {% endfor %}
-                    {% endfor %}
+					{% endif %}
+                    
+					{% endfor %}
+
+					<div class="butndiv">
+
+						<button 
+						type="submit"
+						class="butn"
+						>
+						Submit
+						</button>
+					</div>
     
-                    <div class="butn"><a href="#">Sign Up</a></div>
                 </form>
 			</div>
 			

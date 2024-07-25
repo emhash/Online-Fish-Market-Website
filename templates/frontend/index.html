@@ -8,8 +8,8 @@
       <img decoding="async" src="{% static "image/homesfish.png" %}" alt="">
     </div>
     <div class="content">
-      <span>fresh and organic</span>
-      <h3>your daily fresh fish</h3>
+      <span>Fresh and Organic</span>
+      <h3>Your daily fresh fish</h3>
       <a href="#" class="btn">get started</a>
     </div>
 </section>
@@ -100,50 +100,48 @@
 </section>
 
 
-
-
-
-{% comment %} 
-<section class="deal" id="deal">
-    <div class="content">
-        <h3 class="title">deal of the day</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam possimus voluptates commodi laudantium!
-            Doloribus sint voluptatibus quaerat farhan suscipit nulla?
-        </p>
-        <div class="count-down">
-    <div class="box">
-        <h3 id="day">00</h3>
-        <span>day</span>
-    </div>
-    <div class="box">
-        <h3 id="hour">00</h3>
-        <span>hour</span>
-    </div>
-    <div class="box">
-        <h3 id="minute">00</h3>
-        <span>minute</span>
-    </div>
-    <div class="box">
-        <h3 id="second">00</h3>
-        <span>second</span>
-    </div>
-    </div>
-    <a href="#" class="btn">check the deal</a>
-    </div>
-</section> {% endcomment %}
-
 <section class="contact" id="contact">
 <h1 class="heading"> <span>contact</span> us </h1>
-<form action="">
+<form  method="POST" novalidate >
+  {% csrf_token %}
+  
+  <div class="inputBox">
+    {{form.name}}
+    {{form.email}}
+    
+  </div>
+  {% if form.name.errors %}
+  {% for error in form.name.errors %}
+  <p style="font-size:15px; shadow:none; color:red;"> {{form.name.label}} - {{error}}</p>
+  {% endfor %}
+  {% endif %}
+  {% if form.email.errors %}
+  {% for error in form.email.errors %}
+  <p style="font-size:15px; shadow:none; color:red;"> {{form.email.label}} - {{error}}</p>
+  {% endfor %}
+  {% endif %}
     <div class="inputBox">
-    <input type="text" placeholder="name">
-    <input type="email" placeholder="email">
+      {{form.number}}
+      {{form.subject}}
+      
     </div>
-    <div class="inputBox">
-    <input type="number" placeholder="number">
-    <input type="text" placeholder="subject">
-    </div>
-    <textarea placeholder="message" name="" id="" cols="30" rows="10"></textarea>
+    {% if form.number.errors %}
+    {% for error in form.number.errors %}
+    <p style="font-size:15px; shadow:none; color:red;"> {{form.number.label}} - {{error}}</p>
+    {% endfor %}
+    {% endif %}
+    {% if form.subject.errors %}
+    {% for error in form.subject.errors %}
+    <p style="font-size:15px; shadow:none; color:red;"> {{form.subject.label}} - {{error}}</p>
+    {% endfor %}
+    {% endif %}
+
+    {{form.message}}
+    {% if form.message.errors %}
+    {% for error in form.message.errors %}
+    <p style="font-size:15px; shadow:none; color:red;"> {{form.message.label}} - {{error}}</p>
+    {% endfor %}
+    {% endif %}
     <input type="submit" value="send message" class="btn">
 </form>
 </section>

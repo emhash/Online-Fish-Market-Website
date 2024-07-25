@@ -14,7 +14,7 @@
   <body>
     <header>
       <div class="header1">
-        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>seafood</a>
+        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>FishBazar</a>
          {% comment %} <form method="GET" class="search-box-container">
           {% for field in searching.form %}
           {{field.label}}
@@ -56,21 +56,23 @@
       <div class="header2">
         <div id="menu-bar" class="fas fa-bars"></div>
         <nav class="navbar">
-          <a href="{% url "homepage" %}">home</a>
+          <a href="{% url "homepage" %}">Home</a>
           <a href="#category">Category</a>
           <a href="{% url "products" %}">Products</a>
-          <a href="#deal">deal</a>
-          <a href="#contact">contact</a>
+          <a href="#deal">Deal</a>
+          <a href="#contact">Contact</a>
           
         </nav>
         <div class="icons">
+          {% if user.is_authenticated %}
           <a href="{% url "cart" %}" class="fas fa-shopping-cart"><span>{{ request.user.profile | cart_data }}</span></a>
           <a href="#" class="fas fa-heart">{% if fav_item %}<span>{{fav_item}}</span>{% endif %}</a>
-          {% if user.is_authenticated %}
-
+          
           <a href="{% url "logout_view" %}" class="fas fa-sign-out-alt"></a>
           
           {% else %}
+          <a href="{% url "cart" %}" class="fas fa-shopping-cart"><span></span></a>
+          <a href="#" class="fas fa-heart">{% if fav_item %}<span>{{fav_item}}</span>{% endif %}</a>
           <a href="{% url "loginpage" %}" class="fas fa-user-circle"></a>
           
           {% endif %}
@@ -84,8 +86,9 @@
       <div class="box-container">
         <div class="box">
           <a href="" class="logo"><i class="fas fa-shopping-basket"></i></a>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam possimus voluptates commodi laudantium!
-            Doloribus sint voluptatibus quaerat farhan suscipit nulla?
+          <p>
+            FishBazar is just like as usual Bazar (Market ) or Super Shop of Fresh and Higene Fishes. 
+            Buy fishes from FishBazar and Enjoy easy fish shopping without any hassle.
           </p>
           <div class="share">
             <a href="#" class="btn fab fa-facebook-f"></a>
@@ -95,7 +98,7 @@
           </div>
         </div>
         <div class="box">
-          <h3>our location</h3>
+          <h3>Our Location</h3>
           <div class="links">
             <a href="#">USA</a>
             <a href="#">india</a>
@@ -105,25 +108,25 @@
           </div>
         </div>
         <div class="box">
-          <h3>quick links</h3>
+          <h3>Quick Links</h3>
           <div class="links">
-            <a href="#">home</a>
-            <a href="#">category</a>
-            <a href="#">product</a>
-            <a href="#">deal</a>
-            <a href="#">contact</a>
+            <a href="#">Home</a>
+            <a href="#">Category</a>
+            <a href="#">Product</a>
+            <a href="#">Deal</a>
+            <a href="#">Contact</a>
           </div>
         </div>
         <div class="box">
-          <h3>download app</h3>
+          <h3>Download App</h3>
           <div class="links">
-            <a href="#">google play</a>
-            <a href="#">window 10</a>
-            <a href="#">app store</a>
+            <a href="#">Google play</a>
+            <a href="#">Window 10</a>
+            <a href="#">App Store</a>
           </div>
         </div>
       </div>
-      <h1 class="credit"> created by <span> @EMHASH </span> || all rights reserved! </h1>
+      <h1 class="credit"> created by <a class="nav-link" href="https://ashiq.my.id/"> @EMHASH </a> || all rights reserved! </h1>
     </section>
 
     <script src="{% static "js/main.js" %}" defer data-deferred="1"></script> 

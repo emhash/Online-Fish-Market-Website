@@ -65,6 +65,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -73,6 +74,15 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'chatxity',
+#         'USER': 'ashiqmyi@localhost',
+#         'PASSWORD': '123456@@@@@@',
+#         'HOST': 'localhost:3306',
+#     }
+# }
 
 
 AUTH_PASSWORD_VALIDATORS = [

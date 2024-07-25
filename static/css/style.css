@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
 
 :root{
+    /* --green:#c4f3d8; */
     --green:#c4f3d8;
     --black:#251610;
     --darkgreen:#06293a;
@@ -8,6 +9,7 @@
 
 body{
     background: var(--green);
+    background-image: linear-gradient(to right top, #051937, #004d68, #2a8589, #7dbc9e, #def0b6);
 }
 
 *{
@@ -100,7 +102,7 @@ section{
 }
 
 .header1{
-    background:#d5ebde;
+    background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
     display:flex;
     align-items: center;
     justify-content: space-between;
@@ -115,9 +117,12 @@ section{
     text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
 }
 
+.logo p{
+    color: white;
+}
 .logo i{
     padding-right: .5rem;
-    color: var(--black);
+    color: gold;
     text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
 }
 
@@ -213,6 +218,7 @@ section{
 
 
 #menu-bar{
+    
     font-size:2.5rem;
     border-radius: .5rem;
     border: .1rem solid var(--black);
@@ -282,8 +288,9 @@ section{
 
 .banner-container .banner .content h3{
     font-size: 3rem;
-    color: gold;
-    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
+    color: var(--black)
+    
+    /* text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7); */
 }
 
 .banner-container .banner .content p{
@@ -635,7 +642,7 @@ section{
     width: 100%;
     padding: .7rem 1.5rem;
     font-size: 1.7rem;
-    color:var(--black);
+    color:#fff;
     text-transform: none;
 }
 
