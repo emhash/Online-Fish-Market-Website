@@ -5,8 +5,9 @@ register = template.Library()
 
 @register.filter
 def cart_data(user):
-    if Order.objects.filter(user = user, payment=False).exists():
-        carts = CartItem.objects.filter(user=user, purchased = False)
+    if user:
+        if Order.objects.filter(user = user, payment=False).exists():
+            carts = CartItem.objects.filter(user=user, purchased = False)
     else:
         carts = None
 
