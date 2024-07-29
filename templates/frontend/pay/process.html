@@ -1,0 +1,60 @@
+{% extends "frontend/base/base.html" %}
+{% load static %}
+{% block title %}Billing{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static "css/billing.css" %}">
+{% endblock css %}
+
+{% block content %}
+
+<section class="contact" id="contact">
+    <h1 class="heading"> <span>Billing</span> Information</h1>
+    <div class="billing-container"> 
+        <div class="form-container">
+            <form method="POST" novalidate="">
+                {% csrf_token %}
+
+                <div class="inputBox">            
+                    {{form.country}}
+                    {{form.city}}
+                </div>
+                <div class="inputBox">            
+                    {{form.area}}
+                    {{form.house_or_road_no}}
+                </div>
+                <div class="inputBox">            
+                    {{form.post_code}}
+                    {{form.phone_no}}
+                </div>
+
+                <input type="submit" value="Save Address" class="btn">
+            </form>
+        </div>
+
+        <div class="summary-container">
+            <h2>Selected Items</h2>
+            {% for item in products %}
+            <div class="cart-item">
+                <img src="{{ item.fish.image.url }}" alt="Fish Image" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h3 class="cart-item-name">{{item.fish.name}}</h3>
+                    <p class="cart-item-price">Price: <span class="item-price">&#2547; {{item.fish.price}}</span></p>
+                    <p class="cart-item-quantity">Quantity: {{item.quantity}} KG</p>
+                </div>
+            </div>
+            <div class="total-summary">
+                <h3>Total: &#2547; {{item.subtotal}}</h3>
+                <p>(With discount)</p>
+            </div>
+            {% endfor %}
+            <div class="total-summary">
+                <hr>
+                <h3>Grand Total: &#2547; {{cost}}</h3>
+            </div>        
+
+            <a href="{% url "payment_session" %}" class="btn proceed-btn">Proceed to Payment</a>
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}

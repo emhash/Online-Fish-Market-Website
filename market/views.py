@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib import messages
 
+from payment.views import payment_process
 from adminpanel.forms import ContactUsMessageForm
 from .models import *
 from .shortcuts import ObjectMaster
 from .filter import FishFilter
 
-def homepage(request):
+def homepage(request):    
     categories = Category.objects.all()
     fishes = Fish.objects.all().order_by('price')
     offers = Offer.objects.all()
@@ -15,7 +17,7 @@ def homepage(request):
         form=ContactUsMessageForm(request.POST)
         if form.is_valid():
             form.save()
-            
+            messages.success(request, "Your message has reached to us. Thank you!")
             return redirect(request.path)                
     else:
         form=ContactUsMessageForm()
@@ -69,9 +71,22 @@ def cart_view(request, u_id):
 @login_required()
 def cart(request):
     profile = request.user.profile # as it is one to one field
+    cart_items = None
     if Order.objects.filter(user = request.user.profile, payment=False).exists():
+        
         cart_items = CartItem.objects.filter(user = profile, purchased = False)
-        ordered = Order.objects.filter(user = profile, payment = False).first()
+        ordered = Order.objects.filter(user = profile, payment = False)[0]
+        
+        if request.method == "POST":
+            selected_items = request.POST.getlist('selected_items')
+            
+            if selected_items:
+                # Store selected items in the session
+                request.session['selected_items'] = selected_items
+                return redirect("process")
+            else:
+                messages.warning(request, "Please select your product to go pay")
+
         context ={
             "cart":cart_items,
             "orders":ordered,
@@ -80,6 +95,7 @@ def cart(request):
     else:
         print("You have no order.")
     return redirect("homepage")
+
 @login_required()
 def cart_plus(request,the_id):
     referring_url = request.META.get('HTTP_REFERER')
@@ -91,7 +107,7 @@ def cart_plus(request,the_id):
                     item.save()
                     return redirect("cart")            
         else:
-            print("Oops You have no oders!")
+            messages.warning(request,"Oops You have no oders!")
     except Exception as e:
         print('ERROR:--> ',e)
 
@@ -120,7 +136,7 @@ def cart_minus(request,the_id):
 
 # ==============================================
 
-# WORKING <<<<---=== 
+# WORKED <<<<---=== 
 def delete_cart_product(request, puid):
     the_cart = get_object_or_404(CartItem, uid=puid.strip())
     try:
@@ -154,6 +170,15 @@ def products(request):
         "searching":search,
     }
     return render(request, "frontend/products.html", context)
+
+@login_required()
+def my_orders(request):
+    profile=request.user.profile
+    orders = Order.objects.filter(user=profile, payment=True)
+    context ={
+        "orders":orders,
+    }
+    return render(request, "frontend/my_orders.html", context)
 
 
 

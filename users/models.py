@@ -79,11 +79,12 @@ class CommonBaseModel(models.Model):
 
 class Profile(CommonBaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    details_filled = models.BooleanField(default=False)
-    image = models.ImageField(upload_to="UserImages",default="default.jpg")
-    age = models.DateField(auto_now=False, auto_now_add=False, null=True)
-    address = models.CharField( max_length=500,null=True)
     
+    name= models.CharField( max_length=250)
+    age = models.DateField(auto_now=False, auto_now_add=False, null=True)
+
+    image = models.ImageField(upload_to="UserImages",default="default.jpg")
+    details_filled = models.BooleanField(default=False)
     
     def is_fully_filled(self):
         fields_names = [f.name for f in self._meta.get_fields()]
@@ -103,3 +104,15 @@ def create_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User) 
 def save_profile(sender, instance, **kwargs): 
     instance.profile.save()
+
+
+    # mypayment.set_customer_info(
+    #     name='John Doe', 
+    #     email='johndoe@email.com', 
+    #     address1='demo address', 
+    #     address2='demo address 2', 
+    #     city='Dhaka', 
+    #     postcode='1207', 
+    #     country='Bangladesh', 
+    #     phone='01711111111'
+    #     )

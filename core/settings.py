@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'market',
     'rest_framework',
     'django_filters',
+    'payment',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

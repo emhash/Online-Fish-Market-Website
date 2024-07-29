@@ -51,6 +51,9 @@ class CartItem(CommonBaseModel):
 
     def subtotal(self):
         return self.fish.discounted_price() * self.quantity
+    
+    def __str__(self) -> str:
+        return f"{self.user.name}'s cart - {self.fish.name}"
 
 class Order(CommonBaseModel):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -67,7 +70,7 @@ class Order(CommonBaseModel):
         return total
      
     def __str__(self) -> str:
-        return f"{self.user} - ID:{self.order_id}"
+        return f"{self.user.name} - ID:{self.order_id}"
 
 
 class Review(CommonBaseModel):
