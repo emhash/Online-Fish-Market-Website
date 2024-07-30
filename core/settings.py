@@ -73,7 +73,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+# api/settings.py
+WSGI_APPLICATION = 'api.wsgi.app'
 
 # DATABASES = {
 #     'default': {
