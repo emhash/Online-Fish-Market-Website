@@ -21,7 +21,7 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -33,9 +33,9 @@ INSTALLED_APPS = [
     'users',
     'adminpanel',
     'market',
-    'rest_framework',
     'django_filters',
     'payment',
+    # 'rest_framework',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,10 +78,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'chatxity',
-#         'USER': 'ashiqmyi@localhost',
-#         'PASSWORD': '123456@@@@@@',
-#         'HOST': 'localhost:3306',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': 
+#         'HOST': '',
 #     }
 # }
 
