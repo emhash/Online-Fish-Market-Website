@@ -25,8 +25,6 @@ def payment_process(request):
     for p_uid in items:
         products.append(CartItem.objects.filter(uid=p_uid.strip(), user=profile)[0])
     
-    # Clear the session
-    # request.session.pop('selected_items', None)
 
     if request.method == "POST":        
         form=BillingAddressForm(request.POST,instance=bill)
@@ -61,8 +59,8 @@ def payment_session(request):
     
     products = []
     for p_uid in cart_products:
-        products.append(CartItem.objects.filter(uid=p_uid.strip(), user=profile)[0])
-  
+        products.append(CartItem.objects.filter(uid=p_uid.strip(), user=profile, purchased=False)[0])
+        
     post_body = {}
 
     post_body['success_url'] = request.build_absolute_uri(reverse('success'))
@@ -129,19 +127,39 @@ def success(request):
 @login_required
 def shopping(request,val_id, trans_id):
     try:
-        profile=request.user.profile
-        items = request.session.get('selected_items')            
-        orders = Order.objects.create(user=profile)
-        orders.payment = True
-        orders.payment_id = val_id.strip()
-        orders.order_id = trans_id.strip()
-        for p_uid in items:
-            this_item =CartItem.objects.filter(uid=p_uid.strip(), user=profile)[0]
-            orders.ordered_items.add(this_item)
-            this_item.purchased = True
-            this_item.save()
-        orders.save()
-        messages(request, "Congrats! Your order took place.")
+        profile=request.user.profile        
+        items = request.session.get('selected_items')
+        print("SESSION --<>>", items)
+        if items:
+            existing_orders=Order.objects.filter(
+                user=profile,
+                payment_id = val_id,
+                order_id = trans_id,
+            )
+            if existing_orders.exists():
+                messages.warning(request, "Your order already took place!")
+                return redirect("my_orders")
+            else:
+                orders = Order.objects.create(user=profile)    
+
+            orders.payment_id = val_id.strip()
+            orders.order_id = trans_id.strip()
+            orders.payment = True
+        
+            for p_uid in items:
+                this_item =CartItem.objects.filter(uid=p_uid.strip(), user=profile)[0]
+                orders.ordered_items.add(this_item)
+                this_item.purchased = True
+                this_item.save()
+            orders.save()
+            # Clear the session
+            request.session.pop('selected_items', None)
+            messages.success(request, "Congrats! Your order took place.")
+            return redirect("my_orders")
+        
+        else:
+            messages.warning(request,"Failed to make your order. If you paid then contact to support now!")
+
     except Exception as e:
         messages.warning(request, f"{e}")
 
@@ -151,9 +169,9 @@ def shopping(request,val_id, trans_id):
 def cancel(request):
     if request.POST or request.post:
         data = request.POST
-        print(data['status'])
-        for i in data:
-            print(i , "==>> ",[data[i]])
+        if data['status']=='CANCELLED':
+            messages.error(request, "Your payment has been canceled!")
+            return redirect("process")
     return render(request, "frontend/pay/cancel.html")
 
 # @login_required

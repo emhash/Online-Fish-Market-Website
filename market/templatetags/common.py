@@ -6,10 +6,7 @@ register = template.Library()
 @register.filter
 def cart_data(profile):
     if profile:
-        if Order.objects.filter(user = profile, payment=False).exists():
-            carts = CartItem.objects.filter(user=profile, purchased = False)
-        else:
-            carts=None
+        carts = CartItem.objects.filter(user=profile, purchased = False)        
         if carts:
             item = carts.count()
             return item

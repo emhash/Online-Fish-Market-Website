@@ -1,0 +1,65 @@
+{% extends "frontend/base/base.html" %}
+{% load static %}
+{% block title %}Order History{% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/orders.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="order-history-page">
+    <div class="sidebar">
+        <h2>Order Filters</h2>
+        <button class="filter-btn active">
+            <i class="fas fa-list"></i>
+            <span>All Orders</span>
+        </button>
+        <button class="filter-btn">
+            <i class="fas fa-truck"></i>
+            <span>Not Yet Shipped</span>
+        </button>
+        <button class="filter-btn">
+            <i class="fas fa-times-circle"></i>
+            <span>Cancelled Orders</span>
+        </button>
+        <button class="filter-btn">
+            <i class="fas fa-check-circle"></i>
+            <span>Completed Orders</span>
+        </button>
+    </div>
+    <div class="main-content">
+        {% for order in orders %}
+            <div class="order-card">
+                <table>
+                    <tr>
+                        <th>Order #{{ order.order_id }}</th>
+                        <td>Placed on {{ order.created_at|date:"d M Y H:i:s" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Manage</th>
+                        <td><a href="#" class="manage-button">Manage</a></td>
+                    </tr>
+                </table>
+                <div class="order-body">
+                    {% for item in order.ordered_items.all %}
+                        <div class="order-item">
+                            <img src="{{ item.fish.image.url }}" alt="{{ item.fish.name }}">
+                            <div class="order-item-details">
+                                <h5>{{ item.fish.name }}</h5>
+                                <span>Qty: {{ item.quantity }}</span>
+                                <span>{{ item.subtotal }} BDT</span>
+                            </div>
+                            <span class="order-item-status ">
+                                {% if order.payment %}
+                                    Delivered on {{ order.updated_at|date:"d M Y" }}
+                                {% else %}
+                                    Cancelled
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

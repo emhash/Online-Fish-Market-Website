@@ -44,70 +44,72 @@ def cart_view(request, u_id):
         fish= the_item,
         purchased= False,
     )
-    orders_item = Order.objects.filter(
-        user = request.user.profile,
-        payment = False,
-    )
-    if orders_item.exists():
-        # print(ordered_item)
-        order = orders_item[0]
-        if order.ordered_items.filter(fish = the_item).exists():
-            add_item[0].quantity += 1
-            # print("Item increamented!")
-            add_item[0].save()
-            return HttpResponseRedirect(referring_url)
-        else:
-            order.ordered_items.add(add_item[0])
-            # print("Item added success")
-            return HttpResponseRedirect(referring_url)
-    else:
-        order = Order(user = request.user.profile)
-        order.save()
-        order.ordered_items.add(add_item[0])
-        # print("Item added to cart")
+    add_item[0].quantity+=1
+    messages.success(request, "Your fish has been added to cart!")
+    '''
+    Below the old logic that was implement for pay with the entire card that 
+    saves with onw order table with the cart items. 
+    But Now i made the logic change so that user can select the cart
+    items and proceed to pay.
+    '''
+    # orders_item = Order.objects.filter(
+    #     user = request.user.profile,
+    #     payment = False,
+    # )
+    # if orders_item.exists():
+    #     # print(ordered_item)
+    #     order = orders_item[0]
+    #     if order.ordered_items.filter(fish = the_item).exists():
+    #         add_item[0].quantity += 1
+    #         # print("Item increamented!")
+    #         add_item[0].save()
+    #         return HttpResponseRedirect(referring_url)
+    #     else:
+    #         order.ordered_items.add(add_item[0])
+    #         # print("Item added success")
+    #         return HttpResponseRedirect(referring_url)
+    # else:
+    #     order = Order(user = request.user.profile)
+    #     order.save()
+    #     order.ordered_items.add(add_item[0])
+    #     # print("Item added to cart")
 
     return redirect(referring_url)
 
 @login_required()
 def cart(request):
-    profile = request.user.profile # as it is one to one field
-    cart_items = None
-    if Order.objects.filter(user = request.user.profile, payment=False).exists():
+    profile = request.user.profile # as it is one to one field    
+    cart_items = CartItem.objects.filter(user = profile, purchased = False)
+    referring_url = request.META.get('HTTP_REFERER')
+    if request.method == "POST":
+        selected_items = request.POST.getlist('selected_items')
         
-        cart_items = CartItem.objects.filter(user = profile, purchased = False)
-        ordered = Order.objects.filter(user = profile, payment = False)[0]
-        
-        if request.method == "POST":
-            selected_items = request.POST.getlist('selected_items')
-            
-            if selected_items:
-                # Store selected items in the session
-                request.session['selected_items'] = selected_items
-                return redirect("process")
-            else:
-                messages.warning(request, "Please select your product to go pay")
-
+        if selected_items:
+            # Store selected items in the session
+            request.session['selected_items'] = selected_items
+            return redirect("process")
+        else:
+            messages.warning(request, "Please select your product to go pay")
+    
+    if cart_items.exists():
         context ={
             "cart":cart_items,
-            "orders":ordered,
+            
         }
         return render(request, "frontend/cart.html", context)
     else:
-        print("You have no order.")
-    return redirect("homepage")
+        messages.warning(request,"You have no items in cart!")
+    return redirect(referring_url)
 
 @login_required()
 def cart_plus(request,the_id):
     referring_url = request.META.get('HTTP_REFERER')
     try:
         item = get_object_or_404(CartItem, uid = the_id.strip())
-        if Order.objects.filter(user = request.user.profile ,ordered_items=item, payment=False).exists():
-                if item.purchased == False:
-                    item.quantity += 1
-                    item.save()
-                    return redirect("cart")            
-        else:
-            messages.warning(request,"Oops You have no oders!")
+        
+        item.quantity += 1
+        item.save()
+        return redirect("cart")
     except Exception as e:
         print('ERROR:--> ',e)
 
@@ -118,18 +120,16 @@ def cart_minus(request,the_id):
     referring_url = request.META.get('HTTP_REFERER')
     try:
         item = get_object_or_404(CartItem, uid = the_id.strip())
-        if Order.objects.filter(user = request.user.profile ,ordered_items=item, payment=False).exists():
-                if item.purchased == False:
-                    if item.quantity > 1:
-                        item.quantity -= 1
-                        item.save()
-                        return redirect("cart")
-                    else:
-                        print("No more item could be decrease!")
+        
+        if item.quantity > 1:
+            item.quantity -= 1
+            item.save()
+
+            return redirect("cart")
         else:
-            print("Oops You have no oders!")
+            messages.warning(request,"No more item could be decrease!")
     except Exception as e:
-        print('ERROR:--> ',e)
+        messages.error(request, e)
 
     return redirect(referring_url)
 
