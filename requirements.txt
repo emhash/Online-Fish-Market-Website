@@ -6,10 +6,13 @@ django-filter==24.2
 django-jazzmin==3.0.0
 idna==3.7
 pillow==10.4.0
+psycopg==3.2.1
+psycopg2==2.9.9
 requests==2.26.0
 sqlparse==0.5.1
 sslcommerz-lib==1.0
 typed-ast==1.5.5
+typing_extensions==4.12.2
 tzdata==2024.1
 urllib3==1.26.19
 wrapt==1.12.1

@@ -65,17 +65,42 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+# WSGI_APPLICATION = 'core.wsgi.application'
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# api/settings.py
+
+WSGI_APPLICATION = 'core.wsgi.app'
+
+
+# POSTGRES_URL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+# POSTGRES_PRISMA_URL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
+# POSTGRES_URL_NO_SSL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb"
+# POSTGRES_URL_NON_POOLING="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+# POSTGRES_USER="default"
+# POSTGRES_HOST="ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech"
+# POSTGRES_PASSWORD="YGn4y5tmsSDo"
+# POSTGRES_DATABASE="verceldb"
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'verceldb',
+        'USER': 'default',
+        'PASSWORD': 'YGn4y5tmsSDo',
+        'HOST': 'ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
-# api/settings.py
-WSGI_APPLICATION = 'api.wsgi.app'
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
