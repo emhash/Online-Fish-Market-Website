@@ -78,10 +78,10 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'chatxity',
-#         'USER': 'ashiqmyi@localhost',
-#         'PASSWORD': '123456@@@@@@',
-#         'HOST': 'localhost:3306',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': ''
+#         'HOST': '',
 #     }
 # }
 
