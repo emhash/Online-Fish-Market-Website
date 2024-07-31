@@ -2,27 +2,31 @@ from pathlib import Path
 import os
 
 SECRET_KEY = 'django-insecure-r$a5(on+pbsj#o2w@ni@&#%jdf)jq@()_-ht@*@3!@wax1rnwy'
-DEBUG = True
+DEBUG = False
 
 # ------- COMMON CODE FOR HANDLE MEDA, STATIC and TEMPLATES ---------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_DIR = os.path.join(BASE_DIR , 'static')
-TEMPLATE_DIR = os.path.join(BASE_DIR , 'templates')
-MEDIA_DIR = os.path.join(BASE_DIR , 'media')
 
+TEMPLATE_DIR = os.path.join(BASE_DIR , 'templates')
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+STATIC_DIR = os.path.join(BASE_DIR , 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [STATIC_DIR, ]
 
+
+MEDIA_DIR = os.path.join(BASE_DIR , 'media')
+MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
+
 
 #  --------------------------==========-------------------------------
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost','*']
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,10 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # --=====> EXTRA <=====------
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-MEDIA_URLS ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-  
+
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = "/auth/login/"
 # ------======== ------
