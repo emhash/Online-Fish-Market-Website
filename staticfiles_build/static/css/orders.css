@@ -1,0 +1,141 @@
+
+.order-history-page {
+    display: flex;
+    background-color: aliceblue;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.order-card {
+    background-color: transparent;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.order-card table .manage-button {
+    border: solid 1px black;
+    padding: 2px 2px 2px 2px;
+    border-radius: 3px;
+    background-color: transparent;
+}
+
+.order-card th, .order-card td {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+.order-card th {
+    text-align: left;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.order-card td {
+    color: #666;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.order-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.order-item-details {
+    flex-grow: 1;
+}
+
+.order-item-details h5 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.order-item-details span {
+    display: block;
+    color: #666;
+}
+
+.order-item-status {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.order-item-status.cancelled {
+    color: #dc3545;
+}
+
+
+
+.sidebar {
+    width: 250px;
+    background-color: #ffffff75;
+    padding: 20px;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background-color: rgb(135, 182, 233);
+    border-color: #0056b3;
+}
+
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.filter-btn {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #071e36;
+    background-color: transparent;
+    color: #031020;
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.filter-btn i {
+    margin-right: 10px;
+}
+
+/* Media query for mobile view */
+@media (max-width: 768px) {
+    .filter-btn span {
+        display: none;
+    }
+    
+    .filter-btn i {
+        margin-right: 0;
+    }
+}

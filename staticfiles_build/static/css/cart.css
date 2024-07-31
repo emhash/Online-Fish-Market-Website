@@ -1,0 +1,196 @@
+
+.cart-container {
+  background-color: #fff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow for depth */
+  padding: 25px;
+  margin: 40px auto; /* Center the cart on the page */
+  max-width: 800px; /* Adjust for optimal width on different devices */
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern font */
+}
+
+.cart-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333; /* Darker color for contrast */
+  margin-bottom: 20px;
+}
+
+.cart-items-wrapper {
+  border-bottom: 1px solid #eee; /* Lighter divider line */
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex; /* Arrange items horizontally */
+  align-items: center;
+  border: 1px solid #ddd; /* Lighter border */
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  transition: transform 0.2s; /* Smooth transition */
+}
+
+.cart-item:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.slect-product {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.cart-item-select {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+  accent-color: #007bff; /* Accent color for checkboxes */
+}
+
+.delete {
+  background-color: #dc3545; /* Red color */
+  color: white;
+  padding: 10px 15px;
+  margin-left: auto;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px; /* Rounded corners for images */
+  object-fit: cover; /* Ensure images fit proportionally within the container */
+  margin-right: 15px;
+}
+
+.cart-item-details {
+  flex: 1; /* Flexible space for details */
+  margin-left: 10px;
+}
+
+.cart-item-name {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.cart-item-price {
+  font-size: 16px;
+  color: #555; /* Muted color for price */
+}
+
+.cart-totals-wrapper {
+  display: flex; /* Arrange totals side-by-side */
+  justify-content: space-between; /* Distribute evenly */
+  margin-top: 30px;
+}
+
+.cart-subtotal,
+.cart-shipping-cost,
+.cart-total {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.subtotal-label,
+.shipping-cost-label,
+.total-label {
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.cart-checkout-btn {
+  background-color: #28a745; /* Green for call to action */
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.cart-checkout-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.quantiy {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.quantiy .cart-item-quantity .plus{
+  margin-right: 5px;
+}
+.quantiy .cart-item-quantity .plus,
+.quantiy .cart-item-quantity .minus {
+  margin-left: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f9fa; /* Light background */
+  transition: background-color 0.2s;
+}
+
+.quantiy .cart-item-quantity .plus:hover,
+.quantiy .cart-item-quantity .minus:hover {
+  background-color: #e2e6ea; /* Slightly darker background on hover */
+}
+
+.cart-item-quantity {
+  font-size: 16px;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .cart-totals-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .cart-container {
+    max-width: 100%; /* Adapt to smaller screens */
+    padding: 15px;
+  }
+
+  .cart-item {
+    flex-wrap: wrap; /* Wrap content on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-totals-wrapper{
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+  .cart-total{
+
+    flex-wrap: wrap;
+  }
+  .cart-container {
+    max-width: 100%; /* Adapt to smaller screens */
+  }
+  .quantiy {
+    max-width: 100%; /* Adapt to smaller screens */
+  }
+
+  .cart-item {
+    flex-wrap: wrap; /* Wrap content on smaller screens */
+  }
+}
