@@ -21,7 +21,7 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost','*']
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
@@ -65,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # DATABASES = {
 #     'default': {
@@ -73,19 +73,8 @@ TEMPLATES = [
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 # api/settings.py
-
-WSGI_APPLICATION = 'core.wsgi.app'
-
-
-# POSTGRES_URL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
-# POSTGRES_PRISMA_URL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require&pgbouncer=true&connect_timeout=15"
-# POSTGRES_URL_NO_SSL="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech:5432/verceldb"
-# POSTGRES_URL_NON_POOLING="postgres://default:YGn4y5tmsSDo@ep-snowy-frog-a4ptwxad.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
-# POSTGRES_USER="default"
-# POSTGRES_HOST="ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech"
-# POSTGRES_PASSWORD="YGn4y5tmsSDo"
-# POSTGRES_DATABASE="verceldb"
 
 
 DATABASES = {
@@ -101,6 +90,7 @@ DATABASES = {
         },
     }
 }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
@@ -129,6 +119,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # --=====> EXTRA <=====------
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+MEDIA_URLS ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+  
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = "/auth/login/"
 # ------======== ------
