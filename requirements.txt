@@ -8,6 +8,7 @@ idna==3.7
 pillow==10.4.0
 psycopg==3.2.1
 psycopg2==2.9.9
+psycopg2-binary==2.9.9
 requests==2.26.0
 sqlparse==0.5.1
 sslcommerz-lib==1.0
