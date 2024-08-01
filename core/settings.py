@@ -72,6 +72,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+
+
+from dotenv import load_dotenv
+import os
+
+load_dotenv() 
+
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -82,30 +90,36 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # api/settings.py
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verceldb',
-        'USER': 'default',
-        'PASSWORD': 'YGn4y5tmsSDo',
-        'HOST': 'ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': 
-#         'HOST': '',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'verceldb',
+#         'USER': 'default',
+#         'PASSWORD': 'YGn4y5tmsSDo',
+#         'HOST': 'ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#             'sslmode': 'require',
+#         },
 #     }
 # }
 
+dbname = os.environ.get('DBNAME')
+uname = os.environ.get('USERNAME')
+password = os.environ.get('PASSWORD')
+host = os.environ.get('HOST')
+port = os.environ.get('PORT')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': f'{dbname}',
+        'USER': f'{uname}',
+        'PASSWORD': f'{password}',
+        'HOST': f'{host}',
+        # 'PORT': f'{port}',
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
