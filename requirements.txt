@@ -5,7 +5,7 @@ Django==4.2.14
 django-filter==24.2
 django-jazzmin==3.0.0
 idna==3.7
-mysqlclient==2.2.4
+mysqlclient
 pillow==10.4.0
 python-dotenv==1.0.1
 requests==2.26.0
