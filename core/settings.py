@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv() 
 
 SECRET_KEY = 'django-insecure-r$a5(on+pbsj#o2w@ni@&#%jdf)jq@()_-ht@*@3!@wax1rnwy'
 DEBUG = False
@@ -73,11 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
-
-from dotenv import load_dotenv
-import os
-
-load_dotenv() 
 
 
 # DATABASES = {
