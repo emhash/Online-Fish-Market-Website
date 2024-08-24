@@ -1,5 +1,9 @@
 Local Setup process:
 
+In Admin panel: 
+admin@gmail.com 
+<br>
+password: 12345
 # Process 1 ---->>
 
 ## Step1:
@@ -59,7 +63,3 @@ python manage.py runserver
 
 ----- THATS ALL THE PROJECT IS RUNNING -----
 
-Admin panel: 
-admin@gmail.com 
-<br>
-password: 12345
