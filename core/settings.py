@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 SECRET_KEY = 'django-insecure-r$a5(on+pbsj#o2w@ni@&#%jdf)jq@()_-ht@*@3!@wax1rnwy'
-DEBUG = False
+DEBUG = True
 
 # ------- COMMON CODE FOR HANDLE MEDA, STATIC and TEMPLATES ---------
 
@@ -26,7 +26,7 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost','*']
+ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com','www.fishbazar.pythonanywhere.com', '127.0.0.1', 'localhost','*']
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # api/settings.py
 
@@ -90,33 +90,33 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'verceldb',
-#         'USER': 'default',
-#         'PASSWORD': 'YGn4y5tmsSDo',
-#         'HOST': 'ep-snowy-frog-a4ptwxad-pooler.us-east-1.aws.neon.tech',
-#         'PORT': '5432',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': '',
 #         'OPTIONS': {
 #             'sslmode': 'require',
 #         },
 #     }
 # }
 
-dbname = os.environ.get('DBNAME')
-uname = os.environ.get('USERNAME')
-password = os.environ.get('PASSWORD')
-host = os.environ.get('HOST')
-port = os.environ.get('PORT')
+# dbname = os.environ.get('DBNAME')
+# uname = os.environ.get('USERNAME')
+# password = os.environ.get('PASSWORD')
+# host = os.environ.get('HOST')
+# port = os.environ.get('PORT')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': f'{dbname}',
-        'USER': f'{uname}',
-        'PASSWORD': f'{password}',
-        'HOST': f'{host}',
-        # 'PORT': f'{port}',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': f'{dbname}',
+#         'USER': f'{uname}',
+#         'PASSWORD': f'{password}',
+#         'HOST': f'{host}',
+#         # 'PORT': f'{port}',
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

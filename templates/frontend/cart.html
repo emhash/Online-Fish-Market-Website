@@ -6,51 +6,93 @@
 {% endblock css %}
 
 {% block content %}
-<h1 class="heading">latest <span>Fishes</span></h1>
-<div class="cart-container">
-  <h2 class="cart-title">Your Shopping Cart</h2>
-  <div class="cart-items-wrapper">
-    <div class="slect-product">
-      <p>Select the product you want to pay for now</p>
-    </div>
-    <form id="FormId" method="POST" novalidate>
-      {% csrf_token %}
-      {% for the_item in cart %}
-      <div class="cart-item">
-        <input type="checkbox" name="selected_items" value="{{ the_item.uid }}" id="id-{{ the_item.uid }}" class="cart-item-select">
-        <img src="{{ the_item.fish.image.url }}" alt="Fish Image" class="cart-item-image">
-        <div class="cart-item-details">
-          <h3 class="cart-item-name">{{ the_item.fish.name }}</h3>
-          <p class="cart-item-price">Price: <span class="item-price">&#2547; {{ the_item.subtotal }}</span></p>
+
+<!-- Shoping Cart Section Begin -->
+<section class="shoping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="shoping__product">Products</th>
+                                <th>Price</th>
+                                <th>Quantity(KG)</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <form id="FormId" method="POST" novalidate>
+                            {% csrf_token %}
+                            {% for the_item in cart %}
+                            <tr>
+                              <td class="shoping__cart__item">
+                                <input type="checkbox" name="selected_items" value="{{ the_item.uid }}" id="id-{{ the_item.uid }}" class="cart-item-select">
+                                  <img style="max-width: 100px;" src="{{the_item.fish.image.url}}" alt="">
+                                  <h5>{{the_item.fish.name}}</h5>
+                              </td>
+                              <td class="shoping__cart__price">
+                                  {{the_item.fish.discounted_price}} &#2547;
+                              </td>
+                              <td class="shoping__cart__quantity">
+
+                                  <div class="quantity">
+                                    <a class="btn border border-danger" href="{% url 'cart_minus' the_item.uid %}" class="plus">-</a>                                        
+                                    <span class="container">{{ the_item.quantity }} </span>
+                                    <a class="btn border border-success" href="{% url 'cart_plus' the_item.uid %}" class="plus">+</a>
+                                  </div>
+
+                              </td>
+                              <td class="shoping__cart__total">
+                                  {{the_item.subtotal}} &#2547;
+                              </td>
+                              <td  class="shoping__cart__item__close">
+                                <a href="{% url "delete_cart_product" the_item.uid %}" >                                    
+                                  <span class="icon_close"></span>
+                                </a>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                            </form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="quantiy">
-          <p class="cart-item-quantity"> Quantity (KG):
-            <a href="{% url 'cart_plus' the_item.uid %}" class="plus">+</a>
-            {{ the_item.quantity }}
-            <a href="{% url 'cart_minus' the_item.uid %}" class="minus">-</a>
-          </p>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="shoping__cart__btns">
+                    <a href="#" class="primary-btn cart-btn border border-info">CONTINUE SHOPPING</a>
+                    
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__continue">
+                    <div class="shoping__discount">
+                        <h5>Discount Codes</h5>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">APPLY COUPON</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="shoping__checkout">
+                    <h5>Cart Total</h5>
+                    <ul>
+                        <li>Shipping Bill <span>120 Tk</span></li>
+                        
+                    </ul>
+                    <button id="buttonId" class="primary-btn">PROCEED WITH SELECTED ITEMS</button>
+                </div>
+            </div>
         </div>
-        <a href="{% url 'delete_cart_product' the_item.uid %}" class="delete">Delete <i class="fas fa-trash"></i></a>
-      </div>
-      {% endfor %}
-    </form>
-  </div>
-  <div class="cart-totals-wrapper">
-    <div class="cart-subtotal">
-      <span class="subtotal-label">Subtotal: &#2547; {{ orders.get_total }}</span>
-      <span class="subtotal-amount"></span>
     </div>
-    <div class="cart-shipping-cost">
-      <span class="shipping-cost-label">Shipping: &#2547; 50</span>
-      <span class="shipping-cost-amount"></span>
-    </div>
-    <div class="cart-total">
-      <span class="total-label">Total: &#2547; {{ orders.get_total }}</span>
-      <span class="total-amount"></span>
-    </div>
-    <a id="buttonId" class="cart-checkout-btn">Proceed to Checkout</a>
-  </div>
-</div>
+</section>
+<!-- Shoping Cart Section End -->
 <script>
   document.getElementById('buttonId').addEventListener('click', function() {
     document.getElementById('FormId').submit();

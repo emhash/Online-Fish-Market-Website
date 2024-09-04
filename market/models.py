@@ -1,6 +1,7 @@
 from django.db import models
 from users.models import Profile
 import uuid
+from django.utils.text import slugify
 
 class CommonBaseModel(models.Model):
     uid = models.UUIDField(primary_key=True, default= uuid.uuid4, editable=False)
@@ -12,11 +13,18 @@ class CommonBaseModel(models.Model):
 
 class Category(CommonBaseModel):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(null=True, blank=True)
     up_to = models.PositiveIntegerField(null=True, blank=True)
     image = models.ImageField( upload_to="FishCategory", default="fishcat.jpg")
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:  
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
+    
 
 class Offer(CommonBaseModel):
     name = models.CharField(max_length=100)

@@ -2,58 +2,60 @@
 {% load static %}
 {% block title %}Sign In{% endblock title %}
 {% block css %}
-<link rel="stylesheet" href="{% static "css/login.css" %}">
 {% endblock css %}
 {% block content %}
 
-<div class="wrapper">
-	<div class="header">
-		<div class="top">
-			<div class="logo">
-				<img src="{% static "image/emhash.png" %}" alt="emhash" style="width: 175px;">
-			</div>
-			{% if messages %}
-			
-			{% for error in messages %}
-			<p style="color:red;">{{error}}</p><br>
-			{% endfor %}
-			{% endif %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 border-info border rounded mb-2">
+            <!-- Logo -->
+            <div class="text-center mb-2">
+                <img src="{% static 'image/emhash.png' %}" alt="emhash" style="width: 175px;">
+            </div>
 
-			<div class="form">
-				<form action="" method="POST">
-					{% csrf_token %}
-					<div class="input_field">
-						<input name="userinfo"  type="text" placeholder="Phone number, username, or email" class="input" value="demo@gmail.com">
-					</div>
-					<div class="input_field">
-						<input name="userpassword"  type="password" placeholder="Password" class="input" value="111111qqqqqq">
-					</div>
-					<div>
-						
-					</div>
-					<div class="butndiv">
-						<button class="butn">Log In</button>
-					</div>
-				</form>
-				</div>
-				<div class="or">
-				<div class="line"></div>
-				<p>OR</p>
-				<div class="line"></div>
-			</div>
-			<div class="dif">
-				
-				<div class="forgot">
-					<a href="#">Forgot password?</a>
-				</div>
-			</div>
-		</div>
-		<div class="signup">
-			<p>Don't have an account? <a href="{% url "registration" %}">Sign up</a></p>
-		</div>
+            <!-- Error Messages -->
+            {% if messages %}
+                {% for error in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-	</div>
+            <!-- Login Card -->
+            <div class="container ">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input name="userinfo" type="text" class="form-control " placeholder="Phone number, username, or email" value="demo@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <input name="userpassword" type="password" class="form-control " placeholder="Password" value="111111qqqqqq">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </form>
+
+                    <!-- OR Separator -->
+                    <div class="text-center my-3">
+                        <hr class="w-25 d-inline-block">
+                        <span class="px-2">OR</span>
+                        <hr class="w-25 d-inline-block">
+                    </div>
+
+                    <!-- Forgot Password Link -->
+                    <div class="text-center">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="text-center mt-4">
+                <p>Don't have an account? <a href="{% url 'registration' %}">Sign up</a></p>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 {% endblock content %}

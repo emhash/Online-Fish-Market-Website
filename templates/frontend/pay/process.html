@@ -7,53 +7,74 @@
 
 {% block content %}
 
-<section class="contact" id="contact">
-    <h1 class="heading"> <span>Billing</span> Information</h1>
-    <div class="billing-container"> 
-        <div class="form-container">
-            <form method="POST" novalidate="">
+<section class="checkout spad">
+    <div class="container">
+        
+        <div class="checkout__form">
+            <h4>Billing Informations</h4>
+            <form method="POST" novalidate>
                 {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        
+                        <div class="checkout__input">
+                            {{form.phone_no}}
+                            
+                        </div>
+                        <div class="row">                            
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    
+                                    {{form.country}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    {{form.city}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    {{form.area}}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    {{form.post_code}}                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            {{form.house_or_road_no}}                            
+                        </div>
 
-                <div class="inputBox">            
-                    {{form.country}}
-                    {{form.city}}
-                </div>
-                <div class="inputBox">            
-                    {{form.area}}
-                    {{form.house_or_road_no}}
-                </div>
-                <div class="inputBox">            
-                    {{form.post_code}}
-                    {{form.phone_no}}
-                </div>
+                        <div class="checkout__input">
+                            <p>Special Note if you want to attach<span>(Optional)</span></p>
+                            <input type="text" placeholder="Notes about your order, e.g. special notes for delivery.">
+                        </div>
+                        <div class="checkout__input">
+                            <button type="submit" class="site-btn">SAVE ADDRESS</button>
+                        </div>
 
-                <input type="submit" value="Save Address" class="btn">
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Your Order</h4>
+                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <ul>
+                                {% for item in products %}
+                                <li>{{item.fish.name}} ({{item.fish.discounted_price}}&#2547;/KG) <span>{{item.subtotal}} &#2547;</span> </li>
+                                
+                                {% endfor %}
+                            </ul>
+                            
+                            <div class="checkout__order__total mt-2">Total <span>{{cost}} &#2547;</span></div>
+                            
+                            <a href="{% url "payment_session" %}" class="site-btn">PLACE ORDER</a>
+                        </div>
+                    </div>
+                </div>
             </form>
-        </div>
-
-        <div class="summary-container">
-            <h2>Selected Items</h2>
-            {% for item in products %}
-            <div class="cart-item">
-                <img src="{{ item.fish.image.url }}" alt="Fish Image" class="cart-item-image">
-                <div class="cart-item-details">
-                    <h3 class="cart-item-name">{{item.fish.name}}</h3>
-                    <p class="cart-item-price">Price: <span class="item-price">&#2547; {{item.fish.price}}</span></p>
-                    <p class="cart-item-quantity">Quantity: {{item.quantity}} KG</p>
-                </div>
-            </div>
-            <div class="total-summary">
-                <h3>Total: &#2547; {{item.subtotal}}</h3>
-                <p>(With discount)</p>
-            </div>
-            {% endfor %}
-            <div class="total-summary">
-                <hr>
-                <h3>Grand Total: &#2547; {{cost}}</h3>
-            </div>        
-
-            <a href="{% url "payment_session" %}" class="btn proceed-btn">Proceed to Payment</a>
-            
         </div>
     </div>
 </section>
