@@ -36,14 +36,3 @@ class ObjectMaster():
             print('Add a query object as constructor.')
 
         return search_option , filtered_query
-
-'''
-<form method="GET">
-    {% for field in searching.form %}
-    {{ field.label }}
-    {{ field }}
-    {% endfor %}
-    <button> Submit </button>
-</form>
-
-'''

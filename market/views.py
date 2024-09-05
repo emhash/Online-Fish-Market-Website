@@ -9,7 +9,7 @@ from .models import *
 from .shortcuts import ObjectMaster
 from .filter import FishFilter
 
-def homepage(request):    
+def homepage(request):
     categories = Category.objects.all()
     fishes = Fish.objects.all().order_by('price')
     offers = Offer.objects.all()
@@ -18,7 +18,7 @@ def homepage(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Your message has reached to us. Thank you!")
-            return redirect(request.path)                
+            return redirect(request.path)
     else:
         form=ContactUsMessageForm()
     obj = ObjectMaster(request=request,the_query=fishes)
