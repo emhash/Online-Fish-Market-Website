@@ -1,7 +1,7 @@
 {% load static %}
 {% load common %}
 <!DOCTYPE html>
-<html lang="zxx">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FishBazar | {% block title %}{% endblock title %}</title>
 
+    <link rel="shortcut icon" href="{% static "image/favicon.ico" %}" type="image/x-icon">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
@@ -61,10 +62,10 @@
             
             {% else %}
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-key"></i> Login</a>
+                <a href="{% url "loginpage" %}"><i class="fa fa-key"></i> Login</a>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> SignUp</a>
+                <a href="{% url "registration" %}"><i class="fa fa-user"></i> SignUp</a>
             </div>
 
             {% endif %}                
@@ -135,10 +136,10 @@
                             
                             {% else %}
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-key"></i> Login</a>
+                                <a href="{% url "loginpage" %}"><i class="fa fa-key"></i> Login</a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> SignUp</a>
+                                <a href="{% url "registration" %}"><i class="fa fa-user"></i> SignUp</a>
                             </div>
                                 
                             {% endif %}
@@ -246,7 +247,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{% url "homepage" %}"><img src="{% static "img/fishlogo.png" %}" alt=""></a>
+                            <a href="{% url "homepage" %}"><img src="{% static "image/fishlogo.png" %}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: Dhaka, Mirpur, Bangladesh</li>
