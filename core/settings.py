@@ -26,7 +26,13 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com','www.fishbazar.pythonanywhere.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com',
+                 'www.fishbazar.pythonanywhere.com', 
+                 '127.0.0.1', 
+                 'localhost',
+                 'fish-market.vercel.app',
+                 '*.vercel.app',
+                 ]
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
@@ -78,29 +84,46 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-# api/settings.py
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': '',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': '',
-#         'PORT': '',
-#         'OPTIONS': {
-#             'sslmode': 'require',
-#         },
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+
+pghost = os.getenv('PGHOST')
+if not pghost:
+    print("PGHOST environment variable is not set. Please set it in your .env file.")
+pgport = os.getenv('PGPORT')
+if not pgport:
+    print("PGPORT environment variable is not set. Please set it in your .env file.")
+pgdatabase = os.getenv('PGDATABASE')
+if not pgdatabase:
+    print("PGDATABASE environment variable is not set. Please set it in your .env file.")
+pguser = os.getenv('PGUSER')
+if not pguser:
+    print("PGUSER environment variable is not set. Please set it in your .env file.")
+pgpassword = os.getenv('PGPASSWORD')
+if not pgpassword:
+    print("PGPASSWORD environment variable is not set. Please set it in your .env file.")
+
+
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'HOST': f"{pghost}",
+    'PORT': f"{pgport}",
+    'NAME': f"{pgdatabase}",
+    'USER': f"{pguser}",
+    'PASSWORD': f"{pgpassword}",
+    'OPTIONS': {'sslmode': 'require'},
+  }
+}
+
+# import dj_database_url
+# DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=True)}
+
 
 # dbname = os.environ.get('DBNAME')
 # uname = os.environ.get('USERNAME')
@@ -146,3 +169,20 @@ TIME_ZONE = 'Asia/Dhaka'
 USE_I18N = True
 USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# ================ backblazeb S3 SETTINGS ================
+
+DEFAULT_FILE_STORAGE = "core.c_storage.MediaStorage"
+
+AWS_ACCESS_KEY_ID        = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY    = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME  = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_ENDPOINT_URL = "https://s3.us-east-005.backblazeb2.com"
+AWS_S3_REGION_NAME  = "us-east-005"
+
+AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_DEFAULT_ACL = None 
+AWS_QUERYSTRING_AUTH = True
+AWS_QUERYSTRING_EXPIRE = 3600
