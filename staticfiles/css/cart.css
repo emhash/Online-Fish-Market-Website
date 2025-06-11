@@ -1,0 +1,6 @@
+.cart-item-select {
+  margin-right: 15px;
+  width: 20px;
+  height: 20px;
+  accent-color: #007bff; /* Accent color for checkboxes */
+}
