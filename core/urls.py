@@ -4,11 +4,11 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('dashboard/', include("adminpanel.urls")),
-    path('', include("market.urls")),
-    path('auth/', include("users.urls")),    
-    path('payment/', include("payment.urls")),
+    path('admin/', admin.site.urls , name="adminpanel"),
+    path('dashboard/', include("apps.adminpanel.urls")),
+    path('', include("apps.market.urls")),
+    path('auth/', include("apps.users.urls")),    
+    path('payment/', include("apps.payment.urls")),
 ]
 if not settings.DEBUG:
     urlpatterns+= staticfiles_urlpatterns()

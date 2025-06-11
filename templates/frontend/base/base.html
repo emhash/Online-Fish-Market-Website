@@ -38,7 +38,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="{% static "image/fishlogo.png" %}" alt=""></a>
+            <a href="#"><img src="{% static "image/fishbazar.jpg" %}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -81,6 +81,9 @@
                 <li><a href="#">Shops</a></li>
                 <li><a href="#">Blog</a></li>
                 <li><a href="#">Contact</a></li>
+                {% if user.is_superuser %}
+                <li><a href="{% url "dashboard" %}">Admin</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -129,6 +132,15 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
+
+                            {% if user.is_superuser %}
+                            
+                            <div class="header__top__right__auth">
+                                <a href="{% url "dashboard" %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                            </div>
+                            <span class=""> | </span>
+                            {% endif %}
+
                             {% if user.is_authenticated %}
                             <div class="header__top__right__auth">
                                 <a href="{% url "logout_view" %}"><i class="fa fa-key"></i> LogOut</a>
@@ -152,7 +164,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{% url "homepage" %}"><img src="{% static "image/fishlogo.png" %}" alt=""></a>
+                        <a href="{% url "homepage" %}"><img src="{% static "image/fishbazar.png" %}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -167,6 +179,9 @@
                             <li><a href="{% url "my_orders" %}">My Orders</a></li>
                             <li><a href="#">Blog</a></li>
                             <li><a href="#">Contact</a></li>
+                            {% if user.is_superuser %}
+                            <li><a href="{% url "dashboard" %}">Admin</a></li>
+                            {% endif %}
                         </ul>
                     </nav>
                 </div>
@@ -247,7 +262,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{% url "homepage" %}"><img src="{% static "image/fishlogo.png" %}" alt=""></a>
+                            <a href="{% url "homepage" %}"><img src="{% static "image/fishbazar.jpg" %}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: Dhaka, Mirpur, Bangladesh</li>
