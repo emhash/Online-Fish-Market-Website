@@ -26,7 +26,13 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com','www.fishbazar.pythonanywhere.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com',
+                 'www.fishbazar.pythonanywhere.com', 
+                 '127.0.0.1', 
+                 'localhost',
+                 'fish-market.vercel.app',
+                 '*.vercel.app',
+                 ]
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
