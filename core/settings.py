@@ -26,7 +26,7 @@ MEDIA_ROOT = MEDIA_DIR
 
 #  --------------------------==========-------------------------------
 
-ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com','www.fishbazar.pythonanywhere.com', '127.0.0.1', 'localhost','*']
+ALLOWED_HOSTS = ['fishbazar.pythonanywhere.com','www.fishbazar.pythonanywhere.com', '127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'jazzmin',
@@ -36,11 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'adminpanel',
-    'market',
+
     'django_filters',
-    'payment',
+    'apps.users',
+    'apps.adminpanel',
+    'apps.market',
+    'apps.payment',
     # 'rest_framework',
 ]
 MIDDLEWARE = [
