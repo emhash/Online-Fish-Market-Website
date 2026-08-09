@@ -220,7 +220,7 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="/products/?" class="d-flex  rounded">
+                            <form action="/products/?" class="d-flex  rounded" id="site-search-form">
                                 <div class="input-group pe-0 pw-0 me-0 mw-0 ps-0 ms-0" style="max-width: 120px; margin:0px 0px 0px 0px;">
                                     <input type="number" name="price_min"  placeholder=" ৳ Min" aria-label="Min Price">
                                 </div>
@@ -328,7 +328,36 @@
     <script src="{% static "js/main.js" %}"></script>
     {% block js %}{% endblock js %}
 
+    <!-- MyAnalytics Tracking -->
+    <script>
+      fetch("https://cupcake-stapling-cupbearer.ngrok-free.dev/analytics.js", {
+        headers: { "ngrok-skip-browser-warning": "true" }
+      })
+        .then((res) => res.text())
+        .then((code) => {
+          const script = document.createElement("script");
+          script.textContent = code;
+          document.body.appendChild(script);
 
+          MyAnalytics.init({
+            trackingId: "WEB_6775BF729C32",
+            endpoint: "https://cupcake-stapling-cupbearer.ngrok-free.dev/api/track"
+          });
+
+          // Auto-track search: the search form here submits via GET to
+          // /products/?name=...&price_min=...&price_max=... — so we detect
+          // it from the URL on page load rather than a JS submit handler.
+          var params = new URLSearchParams(window.location.search);
+          if (window.location.pathname.indexOf('/products/') !== -1 && params.get('name')) {
+            MyAnalytics.track('search', {
+              query: params.get('name'),
+              priceMin: params.get('price_min') || undefined,
+              priceMax: params.get('price_max') || undefined
+            });
+          }
+        })
+        .catch((err) => console.error("Analytics load failed:", err));
+    </script>
 
 </body>
 
